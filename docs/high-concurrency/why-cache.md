@@ -6,13 +6,9 @@
 
 只要问到缓存，上来第一个问题，肯定是先问问你项目哪里用了缓存？为啥要用？不用行不行？如果用了以后可能会有什么不良的后果？
 
-这就是看看你对缓存这个东西背后有没有思考，如果你就是傻乎乎的瞎用，没法给面试官一个合理的解答，那面试官对你印象肯定不太好，觉得你平时思考太少，就知道干活儿。
-
 
 ## 面试题剖析
 ### 项目中缓存是如何使用的？
-这个，需要结合自己项目的业务来。
-
 ### 为什么要用缓存？
 用缓存，主要有两个用途：**高性能**、**高并发**。
 
@@ -32,8 +28,8 @@ mysql 这么重的数据库，压根儿设计不是让你玩儿高并发的，�
 
 ### 用了缓存之后会有什么不良后果？
 常见的缓存问题有以下几个：
-- [缓存与数据库双写不一致](/docs/high-concurrency/redis-consistence.md)
-- [缓存雪崩、缓存穿透](/docs/high-concurrency/redis-caching-avalanche-and-caching-penetration.md)
+- [缓存与数据库双写不一致](redis-consistence.md)
+- [缓存雪崩、缓存穿透](redis-caching-avalanche-and-caching-penetration.md)
 - [缓存并发竞争](/docs/high-concurrency/redis-cas.md)
 
 后面再详细说明。
