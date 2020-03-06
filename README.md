@@ -142,7 +142,6 @@
 - [分布式服务接口的幂等性如何设计（比如不能重复扣款）？](./docs/distributed-system/distributed-system-idempotency.md)
 - [分布式服务接口请求的顺序性如何保证？](./docs/distributed-system/distributed-system-request-sequence.md)
 - [如何自己设计一个类似 Dubbo 的 RPC 框架？](./docs/distributed-system/dubbo-rpc-design.md)[手写rpc代码下载!](https://github.com/shishan100/Java-Interview-Advanced/raw/master/docs/distributed-system/code/rpc-demo.zip)
-- [为什么要进行系统拆分？如何进行系统拆分？拆分后不用 Dubbo 可以吗？](./docs/distributed-system/why-dubbo.md)
 
 
 ### 分布式锁

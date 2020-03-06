@@ -7,10 +7,6 @@ dubbo 支持哪些通信协议？支持哪些序列化协议？说一下 Hessian
 接着就可以针对底层进行深入的问问了，比如第一步就可以先问问序列化协议这块，就是平时 RPC 的时候怎么走的？
 
 ## 面试题剖析
-**序列化**，就是把数据结构或者是一些对象，转换为二进制串的过程，而**反序列化**是将在序列化过程中所生成的二进制串转换成数据结构或者对象的过程。
-
-![serialize-deserialize](/images/serialize-deserialize.png)
-
 ### dubbo 支持不同的通信协议
 - dubbo 协议
 
@@ -19,12 +15,6 @@ dubbo 支持哪些通信协议？支持哪些序列化协议？说一下 Hessian
 为了要支持高并发场景，一般是服务提供者就几台机器，但是服务消费者有上百台，可能每天调用量达到上亿次！此时用长连接是最合适的，就是跟每个服务消费者维持一个长连接就可以，可能总共就 100 个连接。然后后面直接基于长连接 NIO 异步通信，可以支撑高并发请求。
 
 长连接，通俗点说，就是建立连接过后可以持续发送请求，无须再建立连接。
-
-![dubbo-keep-connection](/images/dubbo-keep-connection.png)
-
-而短连接，每次要发送请求之前，需要先重新建立一次连接。
-
-![dubbo-not-keep-connection](/images/dubbo-not-keep-connection.png)
 
 - rmi 协议
 
@@ -42,8 +32,11 @@ dubbo 支持哪些通信协议？支持哪些序列化协议？说一下 Hessian
 
 走 SOAP 文本序列化。
 
+
+
 ### dubbo 支持的序列化协议
-dubbo 支持 hession、Java 二进制序列化、json、SOAP 文本序列化多种序列化协议。但是 hessian 是其默认的序列化协议。
+
+dubbo 支持 hession、Java 二进制序列化、json、SOAP 文本序列化多种序列化协议。 hessian 是其默认的序列化协议。
 
 ### 说一下 Hessian 的数据结构
 Hessian 的对象序列化机制有 8 种原始类型：

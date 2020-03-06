@@ -1,10 +1,5 @@
 ## 面试题
-dubbo 的 spi 思想是什么？
-
-## 面试官心理分析
-继续深入问呗，前面一些基础性的东西问完了，确定你应该都 ok，了解 dubbo 的一些基本东西，那么问个稍微难一点点的问题，就是 spi，先问问你 spi 是啥？然后问问你 dubbo 的 spi 是怎么实现的？
-
-其实就是看看你对 dubbo 的掌握如何。
+dubbo 的 spi 思想是什么？ dubbo 的 spi 是怎么实现的？
 
 ## 面试题剖析
 ### spi 是啥？
@@ -17,9 +12,7 @@ spi，简单来说，就是 `service provider interface`，说白了是什么意
 spi 机制一般用在哪儿？**插件扩展的场景**，比如说你开发了一个给别人使用的开源框架，如果你想让别人自己写个插件，插到你的开源框架里面，从而扩展某个功能，这个时候 spi 思想就用上了。
 
 ### Java spi 思想的体现
-spi 经典的思想体现，大家平时都在用，比如说 jdbc。
-
-Java 定义了一套 jdbc 的接口，但是 Java 并没有提供 jdbc 的实现类。
+spi 经典的思想体现，大家平时都在用，比如说 jdbc。Java 定义了一套 jdbc 的接口，但是 Java 并没有提供 jdbc 的实现类。
 
 但是实际上项目跑的时候，要使用 jdbc 接口的哪些实现类呢？一般来说，我们要**根据自己使用的数据库**，比如 mysql，你就将 `mysql-jdbc-connector.jar` 引入进来；oracle，你就将 `oracle-jdbc-connector.jar` 引入进来。
 
@@ -31,7 +24,7 @@ dubbo 也用了 spi 思想，不过没有用 jdk 的 spi 机制，是自己实�
 Protocol protocol = ExtensionLoader.getExtensionLoader(Protocol.class).getAdaptiveExtension();
 ```
 
-Protocol 接口，在系统运行的时候，，dubbo 会判断一下应该选用这个 Protocol 接口的哪个实现类来实例化对象来使用。
+Protocol 接口，在系统运行的时候，dubbo 会判断一下应该选用这个 Protocol 接口的哪个实现类来实例化对象来使用。
 
 它会去找一个你配置的 Protocol，将你配置的 Protocol 实现类，加载到 jvm 中来，然后实例化对象，就用你的那个 Protocol 实现类就可以了。
 
@@ -73,16 +66,16 @@ hessian=com.alibaba.dubbo.rpc.protocol.hessian.HessianProtocol
 ### 如何自己扩展 dubbo 中的组件
 下面来说说怎么来自己扩展 dubbo 中的组件。
 
-自己写个工程，要是那种可以打成 jar 包的，里面的 `src/main/resources` 目录下，搞一个 `META-INF/services`，里面放个文件叫：`com.alibaba.dubbo.rpc.Protocol`，文件里搞一个`my=com.bingo.MyProtocol`。自己把 jar 弄到 nexus 私服里去。
+自己写个工程，里面的 `src/main/resources` 目录下，搞一个 `META-INF/services`，里面放个文件叫：`com.alibaba.dubbo.rpc.Protocol`，文件里搞一个`my=com.bingo.MyProtocol`。自己把 jar 弄到 nexus 私服里去。
 
 然后自己搞一个 `dubbo provider` 工程，在这个工程里面依赖你自己搞的那个 jar，然后在 spring 配置文件里给个配置：
 
 ```xml
 <dubbo:protocol name=”my” port=”20000” />
 ```
-provider 启动的时候，就会加载到我们 jar 包里的`my=com.bingo.MyProtocol` 这行配置里，接着会根据你的配置使用你定义好的 MyProtocol 了，这个就是简单说明一下，你通过上述方式，可以替换掉大量的 dubbo 内部的组件，就是扔个你自己的 jar 包，然后配置一下即可。
+provider 启动的时候，就会加载到我们 jar 包里的`my=com.bingo.MyProtocol` 这行配置里，接着会根据你的配置使用你定义好的 MyProtocol 了，这个就是简单说明一下，你通过上述方式，**可以替换掉大量的 dubbo 内部的组件**，就是扔个你自己的 jar 包，然后配置一下即可。
 
-![dubbo-spi](/images/dubbo-spi.png)
+![dubbo-spi](./images/dubbo-spi.png)
 
 dubbo 里面提供了大量的类似上面的扩展点，就是说，你如果要扩展一个东西，只要自己写个 jar，让你的 consumer 或者是 provider 工程，依赖你的那个 jar，在你的 jar 里指定目录下配置好接口名称对应的文件，里面通过 `key=实现类`。
 

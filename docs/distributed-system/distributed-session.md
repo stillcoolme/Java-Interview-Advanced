@@ -33,7 +33,7 @@ session 是啥？浏览器有个 cookie，在一段时间内这个 cookie 都存
          port="{redis.port}"
          database="{redis.dbnum}"
          maxInactiveInterval="60"/>
-```         
+```
 
 然后指定 redis 的 host 和 port 就 ok 了。
 
